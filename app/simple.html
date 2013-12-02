@@ -1,0 +1,65 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Knockout Validation Rule Engine</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script data-main="js/config" src="js/require.min.js"></script>
+    <link href="css/site.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<script>
+    require(['simple']);
+</script>
+<div class="container ">
+    <div class="formBox">
+        <h1>Knockout Validation Rule Engine</h1>
+        <p></p>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="userEmail">Email Address</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: userEmail, valueUpdate:'afterkeydown'" type="text" id="userEmail"
+                           placeholder="Email">
+                </div>
+            </div>
+
+            <div class="control-group">&nbsp;</div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <a data-bind="click: function(){alert('submitted')}" class="btn btn-primary">Sign in</a>
+                </div>
+            </div>
+
+            <div class="control-group">&nbsp;</div>
+        </form>
+    </div>
+
+    <div class="formBox">
+        <pre class="prettyprint">
+define(['knockout', 'knockoutValidationRuleEngine'], function (ko, RuleEngine) {
+    var ruleEngine = new RuleEngine(ruleSet);
+
+    var ruleSet = {
+        userEmail: { email: true }
+    };
+
+    var model = {
+        userEmail: ko.observable('')
+    };
+
+    ruleEngine.apply(model);
+
+    ko.applyBindings(model, $('html')[0]);
+});
+        </pre>
+    </div>
+</div>
+</body>
+</html>

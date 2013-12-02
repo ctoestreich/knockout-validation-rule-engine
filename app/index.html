@@ -1,0 +1,118 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Knockout Validation Rule Engine</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link href="css/site.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script data-main="js/config" src="js/require.min.js"></script>
+</head>
+<body>
+<script>
+    if (!window.requireTestMode) {
+        require(['main']);
+    }
+</script>
+<div class="container ">
+    <div class="formBox">
+        <h1>Knockout Validation Rule Engine</h1>
+        <p></p>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="firstName">First name</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: firstName, valueUpdate:'afterkeydown'" type="text" id="firstName"
+                           placeholder="First Name">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="middleName">Middle name</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: middleName, valueUpdate:'afterkeydown'" type="text" id="middleName"
+                           placeholder="Middle Name">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="lastName">Last name</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: lastName, valueUpdate:'afterkeydown'" type="text" id="lastName"
+                           placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="address1">Address Line 1</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.address1, valueUpdate:'afterkeydown'" type="text" id="address1"
+                           placeholder="Address Line 1">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="address2">Address Line 2</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.address2, valueUpdate:'afterkeydown'" type="text" id="address2"
+                           placeholder="Address Line 2">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="city">City</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.city, valueUpdate:'afterkeydown'" type="text" id="city"
+                           placeholder="City">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="state">State</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.state, valueUpdate:'afterkeydown'" type="text" id="state"
+                           placeholder="State">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="zipCode">Zip Code</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.zipCode, valueUpdate:'afterkeydown'" type="text" id="zipCode"
+                           placeholder="Zip Code" maxlength="5">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="phone">Phone Number</label>
+
+                <div class="controls">
+                    <input class="form-control" data-bind="value: address.phone.phone, valueUpdate:'afterkeydown'" type="text" id="phone"
+                           placeholder="Phone Number" maxlength="12">
+                </div>
+            </div>
+
+            <div class="control-group">&nbsp;</div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <a data-bind="click: submitForm" class="btn btn-primary">Sign in</a>
+                </div>
+            </div>
+
+            <div class="control-group">&nbsp;</div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
