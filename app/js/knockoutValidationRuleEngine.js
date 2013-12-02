@@ -16,14 +16,14 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
 
         ko.validation.rules["validDigit"] = {
             validator: function (value) {
-                return  /^\d+$/.test(value);
+                return  (/^\d+$/).test(value);
             },
             message: "Please enter a valid number."
         };
 
         ko.validation.rules["validName"] = {
             validator: function (value) {
-                var regExp = new RegExp("^[/a-z '\-]*$", "i");
+                var regExp = new RegExp("^[/a-z '\\-]*$", "i");
                 return  regExp.test(value);
             },
             message: "Only the following characters are accepted: letters, space, apostrophe or hyphen(-)."
@@ -35,7 +35,7 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
          */
         ko.validation.rules["noSpecialChars"] = {
             validator: function (value) {
-                var regExp = new RegExp("^[/a-z0-9 '\.,#-]*$", "i");
+                var regExp = new RegExp("^[/a-z0-9 '\\.,#-]*$", "i");
                 return  regExp.test(value);
             },
             message: "Only the following characters are accepted: letters, numbers, space, comma, dot, pound(#), hyphen(-) or forward slash(/)."
@@ -43,7 +43,7 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
 
         ko.validation.rules["validSelectValue"] = {
             validator: function (value) {
-                value = (!value || (value == undefined)) ? '' : value;
+                value = (!value || (value === undefined)) ? '' : value;
                 value += '';
                 return value.replace(/^\s+|\s+$/g, '') !== '';
             },
@@ -73,7 +73,7 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
                 if (newValueAdjusted !== currentValue) {
                     target(newValueAdjusted);
                 } else {
-                    if (newValue != currentValue) {
+                    if (newValue !== currentValue) {
                         target.notifySubscribers(newValueAdjusted);
                     }
                 }
@@ -108,7 +108,7 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
             ko.validation.registerExtenders();
         }
 
-        function initialize(ruleSet, options) {
+        function initialize(options) {
             ko.validation.init(options);
         }
 
@@ -149,7 +149,7 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
         }
 
         //initialize the rule engine with init options and any additional rules you want to apply.
-        initialize(ruleSet, options);
+        initialize(options);
 
         return {
             addRule: addRule,
@@ -158,7 +158,6 @@ define(["knockout", "knockout.validation", "_"], function (ko, validation, _) {
             registerExtenders: ko.validation.registerExtenders,
             ruleSet: ruleSet,
             rules: ko.validation.rules
-        }
+        };
     };
-
 });

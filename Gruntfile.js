@@ -51,7 +51,11 @@ module.exports = function (grunt) {
             }
         },
         qunit: {
-            files: ['test/**/*.html']
+            all: {
+                options: {
+                    urls: ['http://localhost:8002/test/index.html']
+                }
+            }
         },
         jshint: {
             gruntfile: {
@@ -64,7 +68,7 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: 'app/js/.jshintrc'
                 },
-                src: ['app/**/*.js']
+                src: ['app/**/knockoutValidationRuleEngine.js', 'app/**/rules.js', 'app/**/filters.js']
             },
             test: {
                 options: {
@@ -117,7 +121,14 @@ module.exports = function (grunt) {
         connect: {
             development: {
                 options: {
-                    keepalive: true
+                    keepalive: true,
+                    port: 8001
+                }
+            },
+
+            test: {
+                options: {
+                    port: 8002
                 }
             },
             production: {
@@ -128,8 +139,8 @@ module.exports = function (grunt) {
                         return [
                             // rewrite requirejs to the compiled version
                             function (req, res, next) {
-                                if (req.url === '/components/requirejs/require.js') {
-                                    req.url = '/dist/require.min.js';
+                                if (req.url === '/app/index.html') {
+                                    req.url = '/dist/index.html';
                                 }
                                 next();
                             },
@@ -145,7 +156,7 @@ module.exports = function (grunt) {
 
     // Default task.
 //    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'uglify']);
-    grunt.registerTask('default', ['clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'connect:test', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify']);
     grunt.registerTask('preview', ['connect:development']);
     grunt.registerTask('preview-live', ['default', 'connect:production']);
 

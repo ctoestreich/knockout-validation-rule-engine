@@ -35,11 +35,11 @@ define(function () {
         },
 
         onlyAlpha: function (value) {
-            return (typeof value === 'string') ? value.replace(/[^A-Za-z \_\-\']/g, '') : value;
+            return (typeof value === 'string') ? value.replace(/[^A-Za-z _\-']/g, '') : value;
         },
 
         noSpecialChars: function (value) {
-            return (typeof value === 'string') ? value.replace(/[^/A-Za-z0-9 \'\.,#-]*$/g, '') : value;
+            return (typeof value === 'string') ? value.replace(/[^\/A-Za-z0-9 '\.,#\-]*$/g, '') : value;
         }
-    }
+    };
 });

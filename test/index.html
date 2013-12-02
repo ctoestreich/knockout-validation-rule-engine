@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Test Suite</title>
+    <meta charset="utf-8">
+    <title>Test Suite</title>
     <script src="../app/js/jquery.min.js"></script>
     <script src="../app/js/bootstrap.min.js"></script>
-  <!-- Load local QUnit. -->
-  <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" media="screen">
-  <script src="../bower_components/qunit/qunit/qunit.js"></script>
+    <!-- Load local QUnit. -->
+    <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" media="screen">
+    <script src="../bower_components/qunit/qunit/qunit.js"></script>
+    <script>
+        QUnit.config.autostart = false;
+    </script>
 
-  <script>
-//    QUnit.config.autostart = false;
-  </script>
-
-  <script data-main="../app/js/config" src="../bower_components/requirejs/require.js"></script>
-  <script>
-    window.requireTestMode = true;
-    require.config({
-      deps: ["tests.js"]
-    });
-  </script>
+    <script data-main="../app/js/config" src="../bower_components/requirejs/require.js"></script>
+    <script>
+        require(["../../test/tests"], function (testSuite) {
+            testSuite.run();
+        });
+    </script>
 </head>
 <body>
-  <div id="qunit"></div>
-  <div id="qunit-fixture">
-    <!-- fixtures go here -->
-  </div>
+<h1 id="qunit-header">QUnit Test Suite</h1>
+
+<h2 id="qunit-banner"></h2>
+
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture"></div>
 </body>
 </html>

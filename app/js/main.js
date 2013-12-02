@@ -10,7 +10,7 @@ define(["knockout", "knockoutValidationRuleEngine", "rules/person/rules"], funct
     var PhoneModel = function () {
         return {
             phone: ko.observable('')
-        }
+        };
     };
 
     var AddressModel = function () {
@@ -21,7 +21,7 @@ define(["knockout", "knockoutValidationRuleEngine", "rules/person/rules"], funct
             state: ko.observable(''),
             zipCode: ko.observable(''),
             phone: new PhoneModel()
-        }
+        };
     };
 
     var personModel = {
