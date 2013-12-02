@@ -9,8 +9,6 @@ env:
     - secure: "CoQsJtNaF96ZROvyh4yYArT8NM/cwszqDDq6lunxK/cBo6aUIYJqNrp6unpl3PKQAKa1kGh3eqlHGLZwy1EQQEV9QFPbrlGQjxK49HJAQ+Axx7GQp34CKXCGhOyKoI5TU84bUzPiSTIB2/bNRjg7CJUGqXueOPfJiSz4+ulq/0Y="
     - secure: "EMpOAc1O60IE1oN4dw4uzYeTrooKb3aEDMD4XilPZAxQaPVX+XKhH7d4lyUtezsXAYaizJvJboSRohec//AD+EOAehf5SRmzeilkdasGP7cdeY0XwpCNRUnx6VNIgFaYAKtv4q1EMGnGMc+D8MvGp7A/w1OkIPB6VXlITvm63WM="
 before_script:
-#  - gem update --system
-#  - gem install compass
   - npm install --quiet -g yo grunt-cli bower generator-travis-ci
   - bower install
 script:
