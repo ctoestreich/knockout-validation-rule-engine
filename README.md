@@ -2,50 +2,152 @@
 
 Knockout Validation Rule Engine
 
+## Description
+
+Provides an easy way to store and reuse rules and ensure that you can apply the same rules to the same model properties across your entire site.
+
 ## Getting Started
 
-Make sure you have the latest packages installed
+Download the latest [knockout-rule-engine](https://github.com/ctoestreich/knockout-validation-rule-engine/tree/master/build) file.
 
-'''
-npm install
-bower install
-'''
+Define a rule set that uses the parent key as the name of the model property you want to map to.  If you wanted to set an email rule for a model with a property
+of userEmail, you would provide the following rule set.
 
-Note: If you don't have 'npm' installed, make sure you have
-[node](http://nodejs.com) installed. If you don't have bower,
-'npm install -g bower'.
+```
+define(['knockout', 'knockout-rule-engine', 'validation-addons'], function (ko, RuleEngine) {
+	var ruleSet = {
+		userEmail: { email: true, required: true }
+	};
 
-The above steps will download all the required software to
-build and run this app, such as [grunt](http://gruntjs.com),
-[requirejs](http://requirejs.org), and [jquery](http://jquery.com).
+    var ruleEngine = new RuleEngine(ruleSet);
 
-## Running the server
+    var model = {
+        userEmail: ko.observable('')
+    };
 
-You can run your app using 'grunt preview'. This will start a
-server on 'localhost:8000', meaning you can simply go to the
-url [localhost:8000/app/index.html](http://localhost:8000/app/index.html)
-while it's running.
+    ruleEngine.apply(model);
 
-If you'd like to run the compiled version, run
-'grunt preview-live' and visit the url [localhost:8000/dist/index.html](http://localhost:8000/dist/index.html)
+    ko.applyBindings(model, $('html')[0]);
+});
+```
 
-## Building the application
+This would be equivalent to the following code.
 
-This application uses requirejs to load the various modules in
-the app folder. However, upon build, all of these files are
-concatenated and minified together to create a small, compressed
-javascript file.
+```
+define(['knockout'], function (ko) {
+    var model = {
+        userEmail: ko.observable('').extend({email: true, required: true});
+    };
 
-Running 'grunt' by itself will run through all of the steps of
-linting the javascript, building out dependencies and ultimately
-creating '/dist/' with all the required dependencies in it.
+    ko.applyBindings(model, $('html')[0]);
+});
+```
 
-## Tests
+## Reusing rules
 
-The test directory uses 'qunit', which is run using phantomJS
-in the console, but can also be ran by launching the server
-'grunt preview' and going to 'localhost:8000/test/index.html'.
+If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.
 
-Create tests in the 'test/tests.js' file, where you can
-require your modules and test their functionality.
 
+
+```
+define(['filters/filters'], function (filters) {
+    return {
+        address1: {
+            required: true,
+            noSpecialChars: true,
+            filter: [filters.noSpecialChars, filters.ltrim]
+        },
+        address2: {
+            noSpecialChars: true,
+            filter: [filters.noSpecialChars, filters.ltrim]
+        },
+        city: {
+            required: true,
+            noSpecialChars: true,
+            filter: [filters.noSpecialChars, filters.ltrim]
+        },
+        state: {
+            validSelectValue: {
+                message: 'Please select a state.'
+            }
+        },
+        zipCode: {
+            required: true,
+            validDigitLength: {
+                params: 5,
+                message: 'Please enter a valid zip code (XXXXX).'
+            },
+            filter: filters.onlyDigits
+        },
+        phone: {
+            required: true,
+            pattern: {
+                message: 'Invalid phone number. (XXX-XXX-XXXX)',
+                params: /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/
+            }
+        }
+    };
+});
+```
+
+## Using The Filter Extender
+
+It is pretty common that you must also filter the input of data on the knockout model via a form.  This is an example filter extender that can be used in conjunction with the rules definitions as in the above example.
+
+```
+ko.extenders.filter = function (target, filter) {
+    var writeFilter = function (newValue) {
+        var newValueAdjusted = (typeof filter === 'function') ? filter(newValue) : newValue;
+        if ($.isArray(filter)) {
+            $.each(filter, function (o) {
+                if (typeof o === 'function') {
+                    newValueAdjusted = o(newValueAdjusted);
+                }
+            });
+        }
+        var currentValue = target();
+        if (newValueAdjusted !== currentValue) {
+            target(newValueAdjusted);
+        } else {
+            if (newValue !== currentValue) {
+                target.notifySubscribers(newValueAdjusted);
+            }
+        }
+    };
+
+    var result = ko.computed({
+        read: target,
+        write: writeFilter
+    }).extend({ notify: 'always', throttle: 1 });
+
+    result(target());
+
+    target.subscribe(writeFilter);
+
+    return target;
+};
+```
+
+Global filters can be setup to be reused via something similar to the following.  See [Filters](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/filters/filters.js) for more information
+
+```
+define(function () {
+    return {
+        ltrim: function (value) {
+            return (typeof value === 'string') ? value.replace(/^\s+/, "") : value;
+        },
+
+        onlyDigits: function (value) {
+            return (typeof value === 'string') ? value.replace(/[^0-9]/g, '') : value;
+        },
+
+        onlyAlpha: function (value) {
+            return (typeof value === 'string') ? value.replace(/[^A-Za-z _\-']/g, '') : value;
+        },
+
+        noSpecialChars: function (value) {
+            return (typeof value === 'string') ? value.replace(/[^\/A-Za-z0-9 '\.,#\-]*$/g, '') : value;
+        }
+    };
+});
+```
