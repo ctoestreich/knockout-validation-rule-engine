@@ -58,7 +58,10 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     timeout: 10000,
-                    urls: ['http://localhost:8002/test/index.html']
+                    urls: [
+                        'http://localhost:8002/test/index.html',
+                        'http://localhost:8002/test/inline.html'
+                    ]
                 }
             }
         },

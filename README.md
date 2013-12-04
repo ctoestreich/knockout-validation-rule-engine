@@ -14,7 +14,7 @@ Define a rule set that uses the parent key as the name of the model property you
 of userEmail, you would provide the following rule set.
 
 ``` javascript
-define(['knockout', 'knockout-rule-engine', 'validation-addons'], function (ko, RuleEngine) {
+define(['knockout', 'knockout-rule-engine'], function (ko, RuleEngine) {
 	var ruleSet = {
 		userEmail: { email: true, required: true }
 	};
@@ -209,7 +209,7 @@ ko.extenders.filter = function (target, filter) {
 };
 ```
 
-Global filters can be setup to be reused via something similar to the following.  See [Filters](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/filters/filters.js) for more information
+Global filters can be setup to be reused via something similar to the following.  See [Filters](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/filters/filters.js) for more information.
 
 ``` javascript
 define(function () {
@@ -235,7 +235,7 @@ define(function () {
 
 ## Without RequireJS
 
-You can still include the plugin without require js.  The plugin adds a global ko.RuleEngine singleton that you can instantiate.  This is done in the [Inline Tests](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/test/inline.html)
+You can still include the plugin without require js.  The plugin adds a global ko.RuleEngine singleton that you can instantiate.  This is done in the [Inline Tests](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/test/inline.html).
 
 ``` html
 <script src="../app/js/knockout-rule-engine.js"></script>

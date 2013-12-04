@@ -59,7 +59,7 @@
         throw 'Knockout.Validation is required, please ensure it is loaded before loading this plug-in';
     }
 
-    ko.RuleEngine = function (ruleSet, options) {
+    exports = function (ruleSet, options) {
         var utils = ko.utils;
         options = options || {};
         ruleSet = ruleSet || {};
@@ -137,6 +137,8 @@
             rules: ko.validation.rules
         };
     };
+
+    ko.RuleEngine = exports;
 
     return ko.RuleEngine;
 }));
