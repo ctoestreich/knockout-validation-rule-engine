@@ -86,8 +86,8 @@
             ko.validation.registerExtenders();
         }
 
-        function addRuleSet(field, ruleset){
-            ruleSet[field] = utils.extend(ruleSet[field] || {}, ruleset);
+        function addRuleSet(name, ruleset){
+            ruleSet[name] = utils.extend(ruleSet[name] || {}, ruleset);
         }
 
         function initialize(options) {

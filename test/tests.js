@@ -31,7 +31,7 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
 
                 ruleEngine.addRule('nyanCat', {
                     validator: function (val) {
-                        return val === 'meow meow meow'
+                        return val === 'meow meow meow';
                     }, message: 'meow meow meow'
                 });
 
