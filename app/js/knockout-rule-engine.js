@@ -86,6 +86,10 @@
             ko.validation.registerExtenders();
         }
 
+        function addRuleSet(name, ruleset){
+            ruleSet[name] = utils.extend(ruleSet[name] || {}, ruleset);
+        }
+
         function initialize(options) {
             ko.validation.init(options);
         }
@@ -128,6 +132,7 @@
 
         return {
             addRule: addRule,
+            addRuleSet: addRuleSet,
             apply: apply,
             getFieldRuleSet: getFieldRuleSet,
             registerExtenders: ko.validation.registerExtenders,

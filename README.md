@@ -131,7 +131,7 @@ define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko
 });
 ```
 
-## Adding Rules At Runtime
+## Adding Validation Rules At Runtime
 
 If you have already instantiated the RuleEngine and need to add a rule later at runtime you can do so via the addRule method.
 
@@ -144,10 +144,23 @@ ruleEngine.addRule('nameNotTom', {
 });
 ```
 
-You would then apply that rule to your model via the following code.
+## Adding Rule Sets At Runtime
+
+You can add additional rule sets to your model via the following code.
 
 ``` javascript
 ruleEngine.addRuleSet('firstName', { nameNotTom: true });
+```
+
+This is extremely handy if you make use of the onlyIf clause in knockout.validation that depends on other model data.  You can add these rules later and not have to inject your model into your rule definitions and keep the them clean.
+
+``` javascript
+var model = {
+	firstName: ko.observable('');
+	foo: ko.observable('');
+}
+
+ruleEngine.addRuleSet('firstName', { nameNotTom: true, onlyIf: function(){ return model.foo() === 'bar'; }});
 ```
 
 ## Using The Filter Extender

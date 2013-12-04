@@ -1,7 +1,7 @@
 define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-addons'], function (ko, RuleEngine, personRules) {
 
     return {
-        run: function(){
+        run: function () {
             QUnit.start();
 
             var ruleEngine = new RuleEngine(personRules);
@@ -26,6 +26,37 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
                 ok(typeof ruleSet.filter === 'function', 'required rule is present');
             });
 
+            test("Test that addRule works", function () {
+                ok(ruleEngine.rules['nyanCat'] === undefined, 'rule does not exist');
+
+                ruleEngine.addRule('nyanCat', {
+                    validator: function (val) {
+                        return val === 'meow meow meow'
+                    }, message: 'meow meow meow'
+                });
+
+                ok(ruleEngine.rules['nyanCat'] !== undefined, 'rule now exists');
+
+                var cat = {
+                    meow: ko.observable('')
+                };
+
+                var ruleSet = {
+                    meow: {nyanCat: true}
+                };
+
+                ruleEngine.apply(cat, ruleSet);
+
+                ok(cat.meow.isValid, 'validation was added to meow');
+                ok(!cat.meow.isValid(), 'value is not valid due to being correct');
+                equal(cat.meow.error(), 'meow meow meow', 'error message is correct');
+
+                cat.meow('meow meow meow');
+
+                ok(cat.meow.isValid(), 'value is now valid');
+                equal(cat.meow.error(), undefined, 'no error message');
+            });
+
             test("Check for rule to be preset after adding ruleSet", function () {
                 var ruleSet = ruleEngine.getFieldRuleSet('notPresent');
 
@@ -36,6 +67,18 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
                 };
 
                 ruleSet = ruleEngine.getFieldRuleSet('notPresent');
+
+                equal(ruleSet.required, true, 'required rule is present');
+            });
+
+            test("Check for rule to be preset after adding ruleSet with addRuleSet method", function () {
+                var ruleSet = ruleEngine.getFieldRuleSet('goofyRule');
+
+                ok(!ruleSet.required, 'rule set is not present');
+
+                ruleEngine.addRuleSet('goofyRule', { required: true });
+
+                ruleSet = ruleEngine.getFieldRuleSet('goofyRule');
 
                 equal(ruleSet.required, true, 'required rule is present');
             });
