@@ -47,7 +47,6 @@ define(['knockout'], function (ko) {
 
 If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.  See [main.js](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/main.js) for more detailed examples.
 
-
 ```
 define(['filters/filters'], function (filters) {
     return {
@@ -130,6 +129,25 @@ define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko
 
     ko.applyBindings(personModel, $('html')[0]);
 });
+```
+
+## Adding Rules At Runtime
+
+If you have already instantiated the RuleEngine and need to add a rule later you can do so via the addRule method.
+
+```
+ruleEngine.addRule('nameNotTom', {
+    validator: function (val) {
+        return val !== 'Tom';
+    },
+    message: 'Your name can not be Tom!'
+});
+```
+
+You would then apply that rule to your model via the following code.
+
+``` javascript
+ruleEngine.ruleSet.firstName = $.extend(ruleEngine.ruleSet.firstName, { nameNotTom: true });
 ```
 
 ## Using The Filter Extender
