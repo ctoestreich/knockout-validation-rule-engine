@@ -76,7 +76,7 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
 
                 ok(!ruleSet.required, 'rule set is not present');
 
-                ruleEngine.addRuleSet('goofyRule', { required: true });
+                ruleEngine.addRuleSet({goofyRule: { required: true }});
 
                 ruleSet = ruleEngine.getFieldRuleSet('goofyRule');
 

@@ -232,3 +232,15 @@ define(function () {
     };
 });
 ```
+
+## Without RequireJS
+
+You can still include the plugin without require js.  The plugin adds a global ko.RuleEngine singleton that you can instantiate.  This is done in the [Inline Tests]()
+
+``` html
+<script src="../app/js/knockout-rule-engine.js"></script>
+<script>
+    var ruleEngine = new ko.RuleEngine({firstName: {required: true, validName: true, filter: function(){}}});
+	...
+</script>
+```

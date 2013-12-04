@@ -46,7 +46,7 @@
         define(["knockout", "knockout.validation", "exports"], factory);
     } else {
         // <script> tag: use the global `ko` object, attaching a `mapping` property
-        factory(ko, ko.validation = {}, ko.ruleEngine = {});
+        factory(ko, ko.validation, ko.RuleEngine = {});
     }
 
 }(function (ko, validation, exports) {
@@ -59,10 +59,7 @@
         throw 'Knockout.Validation is required, please ensure it is loaded before loading this plug-in';
     }
 
-    // create our namespace object
-    ko.ruleEngine = exports;
-
-    return function (ruleSet, options) {
+    ko.RuleEngine = function (ruleSet, options) {
         var utils = ko.utils;
         options = options || {};
         ruleSet = ruleSet || {};
@@ -86,8 +83,8 @@
             ko.validation.registerExtenders();
         }
 
-        function addRuleSet(name, ruleset){
-            ruleSet[name] = utils.extend(ruleSet[name] || {}, ruleset);
+        function addRuleSet(newRuleSet){
+           utils.extend(ruleSet, newRuleSet || {});
         }
 
         function initialize(options) {
@@ -140,4 +137,6 @@
             rules: ko.validation.rules
         };
     };
+
+    return ko.RuleEngine;
 }));
