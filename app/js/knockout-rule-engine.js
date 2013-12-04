@@ -64,8 +64,6 @@
         options = options || {};
         ruleSet = ruleSet || {};
 
-        options = utils.extend({insertMessages: true, messagesOnModified: true, deep: true}, options);
-
         function apply(model, rules) {
             if (rules) {
                 utils.extend(ruleSet, rules);

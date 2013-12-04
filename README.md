@@ -43,6 +43,42 @@ define(['knockout'], function (ko) {
 });
 ```
 
+## Override Knockout Validation Options
+
+You can pass in the options you want to use for the knockout.validation library as the optional second param in the constructor.  For example if you
+wanted to disable the validation plugin from auto inserting messages you would use the following.
+
+``` javascript
+define(['knockout', 'knockout-rule-engine'], function (ko, RuleEngine) {
+	var ruleSet = {
+		userEmail: { email: true, required: true }
+	};
+
+    var ruleEngine = new RuleEngine(ruleSet, {insertMessages: false});
+
+    var model = {
+        userEmail: ko.observable('')
+    };
+
+    ruleEngine.apply(model);
+
+    ko.applyBindings(model, $('html')[0]);
+});
+```
+
+See [Configuration Options](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/Configuration) for details on all the Knockout.Validation options.
+
+## Deep Mapping
+
+By default the plugin will attempt to recurse your model tree and look at all properties and try and match rules against them.  If you only want to apply rules to the first level object simply pass a flag with deep set to false in the options param.
+
+``` javascript
+define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko, RuleEngine, personRules) {
+	var ruleEngine = new RuleEngine(personRules, {deep: false});
+    ... do work ...
+});
+```
+
 ## Reusing rules
 
 If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.  See [main.js](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/main.js) for more detailed examples.
@@ -91,8 +127,6 @@ define(['filters/filters'], function (filters) {
 Then you can include this module named rules/address/rules.js into any model that has address or nested address properties that match the keys above (address1, address2, etc).
 
 ``` javascript
-// to depend on a bower installed component:
-// define(['component/componentName/file'])
 
 define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko, RuleEngine, personRules) {
 

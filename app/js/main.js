@@ -1,5 +1,3 @@
-// to depend on a bower installed component:
-// define(['component/componentName/file'])
 
 define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-addons"], function (ko, RuleEngine, personRules) {
 
