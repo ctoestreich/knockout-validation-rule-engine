@@ -2,7 +2,7 @@
     "name": "knockout-valdiation-rule-engine",
     "description": "Knockout Validation Rule Engine",
     "repository": "https://github.com/ctoestreich/knockout-validation-rule-engine",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "engines": {
         "node": ">= 0.8.0"
     },

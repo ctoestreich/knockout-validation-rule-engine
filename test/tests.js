@@ -1,4 +1,4 @@
-define(['knockout', 'knockoutValidationRuleEngine', 'rules/person/rules'], function (ko, RuleEngine, personRules) {
+define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-addons'], function (ko, RuleEngine, personRules) {
 
     return {
         run: function(){

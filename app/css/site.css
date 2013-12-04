@@ -1,9 +1,14 @@
+body {
+    margin-top: 40px;
+}
+
 .validationMessage {
     color: #c20907;
     margin-left: 10px;
 }
 
 .formBox {
+    vertical-align: top;
     width: 48%;
     margin: 0 10px;
     background-color: #fff;
@@ -18,3 +23,4 @@
     margin-top: 40px;
     font-size: 10px;
 }
+

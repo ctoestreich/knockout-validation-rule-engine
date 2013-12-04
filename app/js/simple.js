@@ -1,4 +1,4 @@
-define(['knockout', 'knockoutValidationRuleEngine'], function (ko, RuleEngine) {
+define(['knockout', 'knockout-rule-engine', 'validation-addons'], function (ko, RuleEngine) {
     var ruleSet = {
         userEmail: { email: true }
     };

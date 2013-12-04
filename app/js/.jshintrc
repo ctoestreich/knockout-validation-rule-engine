@@ -11,5 +11,5 @@
     "boss": true,
     "eqnull": true,
     "browser": true,
-    "predef": ["require", "define", "alert", "_", "$", "console"]
+    "predef": ["require", "define", "alert", "_", "$", "console", "ko", "exports"]
 }

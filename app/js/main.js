@@ -1,7 +1,7 @@
 // to depend on a bower installed component:
 // define(['component/componentName/file'])
 
-define(["knockout", "knockoutValidationRuleEngine", "rules/person/rules"], function (ko, RuleEngine, personRules) {
+define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-addons"], function (ko, RuleEngine, personRules) {
 
     // set deep to false if you do not want to traverse rules
     // var ruleEngine = new RuleEngine(personRules, {deep: false});

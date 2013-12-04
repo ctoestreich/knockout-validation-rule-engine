@@ -48,6 +48,10 @@ module.exports = function (grunt) {
             dist: {
                 src: '<%= concat.dist.dest %>',
                 dest: 'dist/js/require.min.js'
+            },
+            ruleEngine: {
+                src: 'app/js/knockout-rule-engine.js',
+                dest: 'build/knockout-rule-engine.min.js'
             }
         },
         qunit: {
@@ -69,7 +73,7 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: 'app/js/.jshintrc'
                 },
-                src: ['app/**/knockoutValidationRuleEngine.js', 'app/**/rules.js', 'app/**/filters.js']
+                src: ['app/**/knockout-rule-engine.js', 'app/**/validation-addons.js', 'app/**/rules.js', 'app/**/filters.js']
             },
             test: {
                 options: {
@@ -115,6 +119,16 @@ module.exports = function (grunt) {
                             'js/bootstrap.min.js',
                             'css/*.css'
                         ]
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        dot: true,
+                        cwd: '<%= yeoman.app %>',
+                        dest: 'build',
+                        src: [
+                            'js/knockout-rule-engine.js'
+                        ]
                     }
                 ]
             }
@@ -157,7 +171,7 @@ module.exports = function (grunt) {
 
     // Default task.
 //    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'uglify']);
-    grunt.registerTask('default', ['jshint', 'connect:test', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'connect:test', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify', 'uglify:ruleEngine']);
     grunt.registerTask('preview', ['connect:development']);
     grunt.registerTask('preview-live', ['default', 'connect:production']);
 

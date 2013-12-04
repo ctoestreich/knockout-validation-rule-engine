@@ -16,6 +16,28 @@
         require(['main']);
     }
 </script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Knockout Validation Rule Engine</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Complex Example</a></li>
+            <li class=""><a href="simple.html">Simple Example</a></li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
 <div class="container ">
     <div class="formBox">
         <h1>Knockout Validation Rule Engine</h1>
@@ -116,7 +138,7 @@
 
     <div class="formBox">
         <pre class="prettyprint">
-define(["knockout", "knockoutValidationRuleEngine", "rules/person/rules"], function (ko, RuleEngine, personRules) {
+define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-addons"], function (ko, RuleEngine, personRules) {
 
     // set deep to false if you do not want to traverse rules
     // var ruleEngine = new RuleEngine(personRules, {deep: false});
