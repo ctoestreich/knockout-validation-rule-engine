@@ -155,12 +155,20 @@ ruleEngine.addRuleSet('firstName', { nameNotTom: true });
 This is extremely handy if you make use of the onlyIf clause in knockout.validation that depends on other model data.  You can add these rules later and not have to inject your model into your rule definitions and keep the them clean.
 
 ``` javascript
+
 var model = {
 	firstName: ko.observable('');
 	foo: ko.observable('');
 }
 
-ruleEngine.addRuleSet('firstName', { nameNotTom: true, onlyIf: function(){ return model.foo() === 'bar'; }});
+//do other work
+
+ruleEngine.addRuleSet('firstName', {
+	nameNotTom: true,
+	onlyIf: function(){
+		return model.foo() === 'bar';
+	}
+});
 ```
 
 ## Using The Filter Extender
