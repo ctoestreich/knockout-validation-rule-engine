@@ -45,8 +45,7 @@ define(['knockout'], function (ko) {
 
 ## Reusing rules
 
-If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.
-
+If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.  See [main.js](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/main.js) for more detailed examples.
 
 
 ```
@@ -87,6 +86,49 @@ define(['filters/filters'], function (filters) {
             }
         }
     };
+});
+```
+
+Then you can include this module named rules/address/rules.js into any model that has address or nested address properties that match the keys above (address1, address2, etc).
+
+```
+// to depend on a bower installed component:
+// define(['component/componentName/file'])
+
+define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko, RuleEngine, personRules) {
+
+    // set deep to false if you do not want to traverse child properties on the model
+    // var ruleEngine = new RuleEngine(personRules, {deep: false});
+    var ruleEngine = new RuleEngine(personRules);
+
+    var PhoneModel = function () {
+        return {
+            phone: ko.observable('')
+        };
+    };
+
+    var AddressModel = function () {
+        return {
+            address1: ko.observable(''),
+            address2: ko.observable(''),
+            city: ko.observable(''),
+            state: ko.observable(''),
+            zipCode: ko.observable(''),
+            phone: new PhoneModel()
+        };
+    };
+
+    var personModel = {
+        firstName: ko.observable(''),
+        lastName: ko.observable(''),
+        middleName: ko.observable(''),
+        address: new AddressModel()
+    };
+
+    // example of wiring a field at apply time
+    ruleEngine.apply(personModel);
+
+    ko.applyBindings(personModel, $('html')[0]);
 });
 ```
 
