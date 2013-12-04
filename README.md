@@ -13,7 +13,7 @@ Download the latest [knockout-rule-engine](https://github.com/ctoestreich/knocko
 Define a rule set that uses the parent key as the name of the model property you want to map to.  If you wanted to set an email rule for a model with a property
 of userEmail, you would provide the following rule set.
 
-```
+``` javascript
 define(['knockout', 'knockout-rule-engine', 'validation-addons'], function (ko, RuleEngine) {
 	var ruleSet = {
 		userEmail: { email: true, required: true }
@@ -33,7 +33,7 @@ define(['knockout', 'knockout-rule-engine', 'validation-addons'], function (ko, 
 
 This would be equivalent to the following code.
 
-```
+``` javascript
 define(['knockout'], function (ko) {
     var model = {
         userEmail: ko.observable('').extend({email: true, required: true});
@@ -47,7 +47,7 @@ define(['knockout'], function (ko) {
 
 If you store your rules in a common directory and include them via require into your models you will ensure you have a common experience across your site.  See [main.js](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/main.js) for more detailed examples.
 
-```
+``` javascript
 define(['filters/filters'], function (filters) {
     return {
         address1: {
@@ -90,7 +90,7 @@ define(['filters/filters'], function (filters) {
 
 Then you can include this module named rules/address/rules.js into any model that has address or nested address properties that match the keys above (address1, address2, etc).
 
-```
+``` javascript
 // to depend on a bower installed component:
 // define(['component/componentName/file'])
 
@@ -133,9 +133,9 @@ define(["knockout", "knockout-rule-engine", "rules/address/rules"], function (ko
 
 ## Adding Rules At Runtime
 
-If you have already instantiated the RuleEngine and need to add a rule later you can do so via the addRule method.
+If you have already instantiated the RuleEngine and need to add a rule later at runtime you can do so via the addRule method.
 
-```
+``` javascript
 ruleEngine.addRule('nameNotTom', {
     validator: function (val) {
         return val !== 'Tom';
@@ -147,14 +147,14 @@ ruleEngine.addRule('nameNotTom', {
 You would then apply that rule to your model via the following code.
 
 ``` javascript
-ruleEngine.ruleSet.firstName = $.extend(ruleEngine.ruleSet.firstName, { nameNotTom: true });
+ruleEngine.addRuleSet('firstName', { nameNotTom: true });
 ```
 
 ## Using The Filter Extender
 
 It is pretty common that you must also filter the input of data on the knockout model via a form.  This is an example filter extender that can be used in conjunction with the rules definitions as in the above example.
 
-```
+``` javascript
 ko.extenders.filter = function (target, filter) {
     var writeFilter = function (newValue) {
         var newValueAdjusted = (typeof filter === 'function') ? filter(newValue) : newValue;
@@ -190,7 +190,7 @@ ko.extenders.filter = function (target, filter) {
 
 Global filters can be setup to be reused via something similar to the following.  See [Filters](https://github.com/ctoestreich/knockout-validation-rule-engine/blob/master/app/js/filters/filters.js) for more information
 
-```
+``` javascript
 define(function () {
     return {
         ltrim: function (value) {
