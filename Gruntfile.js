@@ -174,7 +174,7 @@ module.exports = function (grunt) {
 
     // Default task.
 //    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'uglify']);
-    grunt.registerTask('default', ['jshint', 'connect:test', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify', 'uglify:ruleEngine']);
+    grunt.registerTask('default', ['jshint', 'connect:test', 'qunit', 'clean', 'htmlmin', 'requirejs', 'concat', 'copy', 'uglify']);
     grunt.registerTask('preview', ['connect:development']);
     grunt.registerTask('preview-live', ['default', 'connect:production']);
 
