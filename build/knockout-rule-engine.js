@@ -16,7 +16,7 @@
 
  define(['knockout', 'knockout-rule-engine'], function (ko, RuleEngine) {
  var ruleSet = {
- userEmail: { email: true }
+        userEmail: { email: true, required: true, notNull: true }
  };
 
  var ruleEngine = new RuleEngine(ruleSet);
@@ -59,6 +59,8 @@
         throw 'Knockout.Validation is required, please ensure it is loaded before loading this plug-in';
     }
 
+    var defaultOptions = {deep: true};
+
     exports = function (ruleSet, options) {
         var utils = ko.utils;
         options = options || {};
@@ -85,7 +87,8 @@
            utils.extend(ruleSet, newRuleSet || {});
         }
 
-        function initialize(options) {
+        function initialize(initOptions) {
+            options = utils.extend(defaultOptions, initOptions);
             ko.validation.init(options);
         }
 

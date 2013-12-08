@@ -96,6 +96,59 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
                 ok(!model.lastName.isValid, 'validation not added to mapped value');
                 ok(!model.firstName.isValid(), 'value is not valid due to being required');
             });
+
+            test("Check for deep model properties to be auto wired", function () {
+                var ssnModel = {
+                    ssn1: ko.observable(''),
+                    ssn2: ko.observable(''),
+                    ssn3: ko.observable(''),
+                    notWired: ko.observable('')
+                };
+
+                var personModel = {
+                    firstName: ko.observable(''),
+                    lastName: '',
+                    ssn: ssnModel
+                };
+
+                ruleEngine.apply(personModel);
+
+                ok(personModel.firstName.isValid, 'validation added to mapped observable');
+                ok(!personModel.lastName.isValid, 'validation not added to mapped value');
+                ok(!personModel.firstName.isValid(), 'value is not valid due to being required');
+
+                ok(personModel.ssn.ssn1.isValid, 'validation added to mapped observable');
+                ok(!personModel.ssn.ssn1.isValid(), 'value is not valid due to being required');
+
+                ok(!personModel.ssn.notWired.isValid, 'validation is not added to mapped observable with no rules');
+
+            });
+
+            test("Check for deep model properties to NOT be auto wired", function () {
+                var newRuleEngine = new RuleEngine(personRules, {deep: false});
+
+                var ssnModel = {
+                    ssn1: ko.observable(''),
+                    ssn2: ko.observable(''),
+                    ssn3: ko.observable(''),
+                    notWired: ko.observable('')
+                };
+
+                var personModel = {
+                    firstName: ko.observable(''),
+                    lastName: '',
+                    ssn: ssnModel
+                };
+
+                newRuleEngine.apply(personModel);
+
+                ok(personModel.firstName.isValid, 'validation added to mapped observable');
+                ok(!personModel.lastName.isValid, 'validation not added to mapped value');
+                ok(!personModel.firstName.isValid(), 'value is not valid due to being required');
+
+                ok(!personModel.ssn.ssn1.isValid, 'validation added to mapped observable');
+                ok(!personModel.ssn.notWired.isValid, 'validation is not added to mapped observable with no rules');
+            });
         }
     };
 });
