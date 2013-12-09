@@ -8,8 +8,8 @@ env:
     #- secure: "dYoUzBT0sH1O9jX2N1rzxyOwOHMHDBA9ERrsov19H50KyLx13SGLxXauUcGo/7fww3V2Rc9bg/ejlxfapyGd2BCJuyRdj8krgcmXayehPF7cWEi/X+ttbTBfMu5uUSHBvOTGmbwchVoOTqDsTbVhzKI+M5CQ8/cO0eG67J2ziAk="
     - secure: dYoUzBT0sH1O9jX2N1rzxyOwOHMHDBA9ERrsov19H50KyLx13SGLxXauUcGo/7fww3V2Rc9bg/ejlxfapyGd2BCJuyRdj8krgcmXayehPF7cWEi/X+ttbTBfMu5uUSHBvOTGmbwchVoOTqDsTbVhzKI+M5CQ8/cO0eG67J2ziAk=
 before_script:
-  - git config user.email "acetrike@yahoo.com"
-  - git config user.name "Christian Oestreich"
+  - git config user.email $GIT_EMAIL
+  - git config user.name "${GIT_EMAIL}"
   - npm install --quiet -g yo grunt-cli bower generator-travis-ci
   - bower install
 script:
@@ -17,7 +17,7 @@ script:
 after_success:
   - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
   - cd site
-#  - if git checkout gh-pages; then git checkout -b gh-pages; fi
+  - if git checkout gh-pages; then git checkout -b gh-pages; fi
   - git rm -rf .
   - cp -R ../dist/* .
   - cp ../dist/.* .

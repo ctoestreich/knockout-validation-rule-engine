@@ -13,32 +13,6 @@
     <script src="../bower_components/knockout.js/knockout.js"></script>
     <script src="../node_modules/knockout.validation/Dist/knockout.validation.js"></script>
     <script src="../app/js/knockout-rule-engine.js"></script>
-    <script>
-        var ruleEngine = new ko.RuleEngine({firstName: {required: true, validName: true, filter: function () {}}});
-
-        $(function () {
-
-            module('Knockout Validation Tests');
-
-            test("Check for required", function () {
-                var testObj = ko.observable('').extend({required: true});
-
-                equal(testObj(), '', 'observable works');
-                equal(testObj.isValid(), false, 'testObj is valid');
-                equal(testObj.error(), 'This field is required.', 'has correct error message');
-            });
-
-            module('Rule Engine Tests');
-
-            test("Check getFieldRuleSet for field", function () {
-                var ruleSet = ruleEngine.getFieldRuleSet('firstName');
-
-                equal(ruleSet.required, true, 'required rule is present');
-                equal(ruleSet.validName, true, 'validName rule is present');
-                ok(typeof ruleSet.filter === 'function', 'filter is present');
-            });
-        });
-    </script>
 </head>
 <body>
 <h1 id="qunit-header">QUnit Test Suite</h1>
@@ -49,5 +23,33 @@
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture"></div>
+
+<script>
+    var ruleEngine = new ko.RuleEngine({firstName: {required: true, validName: true, filter: function () {}}});
+
+    $(function () {
+
+        module('Knockout Validation Tests');
+
+        test("Check for required", function () {
+            var testObj = ko.observable('').extend({required: true});
+
+            equal(testObj(), '', 'observable works');
+            equal(testObj.isValid(), false, 'testObj is valid');
+            equal(testObj.error(), 'This field is required.', 'has correct error message');
+        });
+
+        module('Rule Engine Tests');
+
+        test("Check getFieldRuleSet for field", function () {
+            var ruleSet = ruleEngine.getFieldRuleSet('firstName');
+
+            equal(ruleSet.required, true, 'required rule is present');
+            equal(ruleSet.validName, true, 'validName rule is present');
+            ok(typeof ruleSet.filter === 'function', 'filter is present');
+        });
+    });
+</script>
+
 </body>
 </html>
