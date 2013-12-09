@@ -14,12 +14,14 @@ before_script:
 script:
   - grunt --verbose
 after_success:
-  - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
+  - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site
+  #> /dev/null 2>&1
   - cd site
-  - if git checkout gh-pages; then git checkout -b gh-pages; fi
+#  - if git checkout gh-pages; then git checkout -b gh-pages; fi
   - git rm -rf .
   - cp -R ../dist/* .
   - cp ../dist/.* .
   - git add -f .
   - git commit -am "adding the yeoman build files to gh-pages"
-  - git push https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
+  - git push https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
+  #> /dev/null 2>&1
