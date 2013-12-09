@@ -5,23 +5,21 @@ env:
   global:
     - GH_OWNER: ctoestreich
     - GH_PROJECT_NAME: knockout-validation-rule-engine
-    - secure: "X0ORsfSKcis1VssUzQS+BevRxzhF4I9suXF/HsCQAet5h1yV8RqRII1kr4WFrIFwcokU2ZVInySoq8QTmUptYamt76L79lw2o2dNGCc4W+iB5evXTCxXyk5uekzcnXCObx0BAK8f19PPiNxo2GNBQfZgZCWBX4WIRh6O6Hzn2rg="
-    - secure: "CoQsJtNaF96ZROvyh4yYArT8NM/cwszqDDq6lunxK/cBo6aUIYJqNrp6unpl3PKQAKa1kGh3eqlHGLZwy1EQQEV9QFPbrlGQjxK49HJAQ+Axx7GQp34CKXCGhOyKoI5TU84bUzPiSTIB2/bNRjg7CJUGqXueOPfJiSz4+ulq/0Y="
-    - secure: "EMpOAc1O60IE1oN4dw4uzYeTrooKb3aEDMD4XilPZAxQaPVX+XKhH7d4lyUtezsXAYaizJvJboSRohec//AD+EOAehf5SRmzeilkdasGP7cdeY0XwpCNRUnx6VNIgFaYAKtv4q1EMGnGMc+D8MvGp7A/w1OkIPB6VXlITvm63WM="
+    - secure: NI1sD1BZcaD627T4oHeoxaxmom+rASSB+xYTOUnQfCCoWuQqfMHJvklhUJkkCZKx23/QrWo9Duy/tW1PvOGzXIvJ8G/TzX+AKYcp888CL7XLfukHCdASYime9W2r02OPLrf2fWtnwbuUb8MqZrksfheXOnOFqaYTPcfyBRfEibE=
 before_script:
+  - git config user.email "acetrike@yahoo.com"
+  - git config user.name "Christian Oestreich"
   - npm install --quiet -g yo grunt-cli bower generator-travis-ci
   - bower install
 script:
   - grunt --verbose --force
 after_success:
-  - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
+  - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
   - cd site
   - if git checkout gh-pages; then git checkout -b gh-pages; fi
   - git rm -rf .
   - cp -R ../dist/* .
   - cp ../dist/.* .
   - git add -f .
-  - git config user.email "acetrike@yahoo.com"
-  - git config user.name "Christian Oestreich"
   - git commit -am "adding the yeoman build files to gh-pages"
-  - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
+  - git push https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
