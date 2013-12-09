@@ -5,7 +5,6 @@
     <title>Test Suite</title>
     <script src="../app/js/jquery.min.js"></script>
     <script src="../app/js/bootstrap.min.js"></script>
-    <!-- Load local QUnit. -->
     <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" media="screen">
     <script src="../bower_components/qunit/qunit/qunit.js"></script>
     <script>
@@ -15,7 +14,9 @@
     <script data-main="../app/js/config" src="../bower_components/requirejs/require.js"></script>
     <script>
         require(["../../test/tests"], function (testSuite) {
-            testSuite.run();
+            $(function(){
+                testSuite.run();
+            });
         });
     </script>
 </head>

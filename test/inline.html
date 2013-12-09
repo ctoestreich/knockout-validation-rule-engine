@@ -14,26 +14,29 @@
     <script src="../node_modules/knockout.validation/Dist/knockout.validation.js"></script>
     <script src="../app/js/knockout-rule-engine.js"></script>
     <script>
-        var ruleEngine = new ko.RuleEngine({firstName: {required: true, validName: true, filter: function(){}}});
+        var ruleEngine = new ko.RuleEngine({firstName: {required: true, validName: true, filter: function () {}}});
 
-        module('Knockout Validation Tests');
+        $(function () {
 
-        test("Check for required", function () {
-            var testObj = ko.observable('').extend({required: true});
+            module('Knockout Validation Tests');
 
-            equal(testObj(), '', 'observable works');
-            equal(testObj.isValid(), false, 'testObj is valid');
-            equal(testObj.error(), 'This field is required.', 'has correct error message');
-        });
+            test("Check for required", function () {
+                var testObj = ko.observable('').extend({required: true});
 
-        module('Rule Engine Tests');
+                equal(testObj(), '', 'observable works');
+                equal(testObj.isValid(), false, 'testObj is valid');
+                equal(testObj.error(), 'This field is required.', 'has correct error message');
+            });
 
-        test("Check getFieldRuleSet for field", function () {
-            var ruleSet = ruleEngine.getFieldRuleSet('firstName');
+            module('Rule Engine Tests');
 
-            equal(ruleSet.required, true, 'required rule is present');
-            equal(ruleSet.validName, true, 'validName rule is present');
-            ok(typeof ruleSet.filter === 'function', 'filter is present');
+            test("Check getFieldRuleSet for field", function () {
+                var ruleSet = ruleEngine.getFieldRuleSet('firstName');
+
+                equal(ruleSet.required, true, 'required rule is present');
+                equal(ruleSet.validName, true, 'validName rule is present');
+                ok(typeof ruleSet.filter === 'function', 'filter is present');
+            });
         });
     </script>
 </head>
