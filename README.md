@@ -1,6 +1,6 @@
 # knockout-valdiation-rule-engine
 
-Knockout Validation Rule Engine
+Knockout Validation Rule Engine [![Build Status](https://travis-ci.org/ctoestreich/knockout-validation-rule-engine.png?branch=master)](https://travis-ci.org/ctoestreich/knockout-validation-rule-engine)
 
 ## Description
 
