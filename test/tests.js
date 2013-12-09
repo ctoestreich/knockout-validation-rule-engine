@@ -2,7 +2,6 @@ define(['knockout', 'knockout-rule-engine', 'rules/person/rules', 'validation-ad
 
     return {
         run: function () {
-            QUnit.start();
 
             var ruleEngine = new RuleEngine(personRules);
 

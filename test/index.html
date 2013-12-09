@@ -23,9 +23,10 @@
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture"></div>
 
-<script>
+<script async type="text/javascript">
     require(["../../test/tests"], function (testSuite) {
         $(function(){
+            QUnit.start();
             testSuite.run();
         });
     });
