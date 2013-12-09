@@ -5,7 +5,7 @@ env:
   global:
     - GH_OWNER: ctoestreich
     - GH_PROJECT_NAME: knockout-validation-rule-engine
-    - secure: NI1sD1BZcaD627T4oHeoxaxmom+rASSB+xYTOUnQfCCoWuQqfMHJvklhUJkkCZKx23/QrWo9Duy/tW1PvOGzXIvJ8G/TzX+AKYcp888CL7XLfukHCdASYime9W2r02OPLrf2fWtnwbuUb8MqZrksfheXOnOFqaYTPcfyBRfEibE=
+    - secure: "dYoUzBT0sH1O9jX2N1rzxyOwOHMHDBA9ERrsov19H50KyLx13SGLxXauUcGo/7fww3V2Rc9bg/ejlxfapyGd2BCJuyRdj8krgcmXayehPF7cWEi/X+ttbTBfMu5uUSHBvOTGmbwchVoOTqDsTbVhzKI+M5CQ8/cO0eG67J2ziAk="
 before_script:
   - git config user.email "acetrike@yahoo.com"
   - git config user.name "Christian Oestreich"
@@ -14,8 +14,7 @@ before_script:
 script:
   - grunt --verbose
 after_success:
-  - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site
-  #> /dev/null 2>&1
+  - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
   - cd site
 #  - if git checkout gh-pages; then git checkout -b gh-pages; fi
   - git rm -rf .
@@ -23,5 +22,4 @@ after_success:
   - cp ../dist/.* .
   - git add -f .
   - git commit -am "adding the yeoman build files to gh-pages"
-  - git push https://${GH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
-  #> /dev/null 2>&1
+  - git push https://${GH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
