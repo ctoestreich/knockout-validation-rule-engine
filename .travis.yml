@@ -12,7 +12,7 @@ before_script:
   - npm install --quiet -g yo grunt-cli bower generator-travis-ci
   - bower install
 script:
-  - grunt --verbose --force
+  - grunt --verbose
 after_success:
   - git submodule add -b gh-pages https://$GH_TOKEN@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
   - cd site
