@@ -12,15 +12,6 @@
     </script>
 
     <script data-main="../app/js/config" src="../bower_components/requirejs/require.js"></script>
-    <script>
-        require(["../../test/tests"], function (testSuite) {
-            $(function(){
-                testSuite.run();
-                //for some reason travis isn't working without this
-            	QUnit.load();
-            });
-        });
-    </script>
 </head>
 <body>
 <h1 id="qunit-header">QUnit Test Suite</h1>
@@ -31,5 +22,13 @@
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture"></div>
+
+<script>
+    require(["../../test/tests"], function (testSuite) {
+        $(function(){
+            testSuite.run();
+        });
+    });
+</script>
 </body>
 </html>
