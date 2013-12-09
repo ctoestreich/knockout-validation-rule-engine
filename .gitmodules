@@ -1,4 +1,0 @@
-[submodule "site"]
-	path = site
-	url = https://github.com/ctoestreich/knockout-validation-rule-engine.git
-	branch = gh-pages
