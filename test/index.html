@@ -16,6 +16,8 @@
         require(["../../test/tests"], function (testSuite) {
             $(function(){
                 testSuite.run();
+                //for some reason travis isn't working without this
+            	QUnit.load();
             });
         });
     </script>
