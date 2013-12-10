@@ -36,7 +36,7 @@ define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-ad
             var $elements = $(".validationMessage:visible");
             if ($elements.length > 0) {
                 var position = $($elements[0]).offset().top - ($(window).height() / 2);
-                $('html,body').animate({scrollTop: position}, 400);
+                $('html,body').animate({scrollTop: position}, 350);
             }
         } else {
             alert('Validation passed!');
