@@ -6,6 +6,10 @@ Knockout Validation Rule Engine [![Build Status](https://travis-ci.org/ctoestrei
 
 Provides an easy way to store and reuse rules and ensure that you can apply the same rules to the same model properties across your entire site.
 
+## Example Application
+
+This is the application that is built from the code in the app directory: [Example Application](http://ctoestreich.github.io/knockout-validation-rule-engine/)
+
 ## Getting Started
 
 Download the latest [knockout-rule-engine](https://github.com/ctoestreich/knockout-validation-rule-engine/tree/master/build) file.
