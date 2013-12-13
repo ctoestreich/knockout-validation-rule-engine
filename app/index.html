@@ -6,15 +6,13 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link href="css/site.css" rel="stylesheet" media="screen">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script data-main="js/config" src="js/require.min.js"></script>
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script data-main="js/config" src="js/libs/require.js"></script>
 </head>
 <body>
 <script>
-    if (!window.requireTestMode) {
-        require(['main']);
-    }
+   require(['main']);
 </script>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

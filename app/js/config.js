@@ -2,16 +2,15 @@ require.config({
     // make bower_components more sensible
     // expose jquery
     paths: {
-        "bower_components": "../../bower_components",
-        "jquery": "../../bower_components/jquery/jquery",
-        '_': '../../bower_components/lodash/dist/lodash.compat.min'
+        "jquery": "libs/jquery.min",
+        '_': 'libs/lodash.compat.min'
 
     },
     map: {
         "*": {
-            "knockout": "../../bower_components/knockout.js/knockout",
-            "ko": "../../bower_components/knockout.js/knockout",
-            "knockout.validation": "../../node_modules/knockout.validation/Dist/knockout.validation"
+            "knockout": "libs//knockout",
+            "ko": "libs/knockout",
+            "knockout.validation": "libs/knockout.validation"
         }
     }
 });

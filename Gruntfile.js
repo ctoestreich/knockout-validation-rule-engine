@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                 banner: '<%= banner %>'
             },
             dist: {
-                src: '<%= concat.dist.dest %>',
+                src: 'dist/js/require.js',
                 dest: 'dist/js/require.min.js'
             },
             ruleEngine: {
@@ -118,8 +118,14 @@ module.exports = function (grunt) {
                         cwd: '<%= yeoman.app %>',
                         dest: '<%= yeoman.dist %>',
                         src: [
-                            'js/jquery.min.js',
-                            'js/bootstrap.min.js',
+                            'js/rules/**',
+                            'js/filters/**',
+                            'js/config.js',
+                            'js/main*.js',
+                            'js/simple.js',
+                            'js/knockout-rule-engine.js',
+                            'js/validation-addons.js',
+                            'js/libs/*',
                             'css/*.css'
                         ]
                     },
