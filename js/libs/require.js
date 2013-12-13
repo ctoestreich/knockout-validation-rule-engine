@@ -1,5 +1,8 @@
-/*! knockout-valdiation-rule-engine - v1.0.0 - 2013-12-13
-* Copyright (c) 2013 Christian Oestreich; Licensed MIT */
+/** vim: et:ts=4:sw=4:sts=4
+ * @license RequireJS 2.1.9 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
+ * Available via the MIT or new BSD license.
+ * see: http://github.com/jrburke/requirejs for details
+ */
 //Not using strict: uneven strict support in browsers, #392, and causes
 //problems with requirejs.exec()/transpiler plugins that may not be strict.
 /*jslint regexp: true, nomen: true, sloppy: true */
@@ -2049,37 +2052,3 @@ var requirejs, require, define;
     //Set up with config info.
     req(cfg);
 }(this));
-
-
-require.config({
-    // make bower_components more sensible
-    // expose jquery
-    paths: {
-        "jquery": "libs/jquery.min",
-        '_': 'libs/lodash.compat.min'
-
-    },
-    map: {
-        "*": {
-            "knockout": "libs//knockout",
-            "ko": "libs/knockout",
-            "knockout.validation": "libs/knockout.validation"
-        }
-    }
-});
-
-// Use the debug version of knockout it development only
-// When compiling with grunt require js will only look at the first 
-// require.config({}) found in this file
-require.config({
-    map: {
-        "*": {
-            "knockout": "../../bower_components/knockout.js/knockout.debug",
-            "ko": "../../bower_components/knockout.js/knockout.debug",
-            "knockout.validation": "../../node_modules/knockout.validation/Dist/knockout.validation"
-        }
-    }
-});
-
-
-define("config", function(){});
