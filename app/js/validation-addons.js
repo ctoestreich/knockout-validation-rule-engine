@@ -1,7 +1,7 @@
 /**
  * A module to add some additional validation rules and a pre-input filter.
  */
-define(['ko', 'knockout.validation'], function(ko){
+define(['knockout', 'knockout.validation'], function(ko){
     ko.validation.rules["validDigit"] = {
         validator: function (value) {
             return  (/^\d+$/).test(value);

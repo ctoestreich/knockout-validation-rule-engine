@@ -57,5 +57,7 @@ define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-ad
     // example of wiring a field at apply time
     ruleEngine.apply(personModel);
 
+    personModel.rules = JSON.stringify(personRules, null, 4);
+
     ko.applyBindings(personModel, $('html')[0]);
 });

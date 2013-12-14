@@ -3,15 +3,10 @@ require.config({
     // expose jquery
     paths: {
         "jquery": "libs/jquery.min",
-        '_': 'libs/lodash.compat.min'
+        '_': 'libs/lodash.compat.min',
+        "knockout": "libs/knockout",
+        "knockout.validation": "libs/knockout.validation"
 
-    },
-    map: {
-        "*": {
-            "knockout": "libs/knockout",
-            "ko": "libs/knockout",
-            "knockout.validation": "libs/knockout.validation"
-        }
     }
 });
 
