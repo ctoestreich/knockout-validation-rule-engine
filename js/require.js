@@ -1,4 +1,4 @@
-/*! knockout-valdiation-rule-engine - v1.0.0 - 2013-12-13
+/*! knockout-valdiation-rule-engine - v1.0.0 - 2013-12-14
 * Copyright (c) 2013 Christian Oestreich; Licensed MIT */
 //Not using strict: uneven strict support in browsers, #392, and causes
 //problems with requirejs.exec()/transpiler plugins that may not be strict.
@@ -2056,15 +2056,10 @@ require.config({
     // expose jquery
     paths: {
         "jquery": "libs/jquery.min",
-        '_': 'libs/lodash.compat.min'
+        '_': 'libs/lodash.compat.min',
+        "knockout": "libs/knockout",
+        "knockout.validation": "libs/knockout.validation"
 
-    },
-    map: {
-        "*": {
-            "knockout": "libs/knockout",
-            "ko": "libs/knockout",
-            "knockout.validation": "libs/knockout.validation"
-        }
     }
 });
 

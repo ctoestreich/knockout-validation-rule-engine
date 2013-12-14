@@ -126,7 +126,11 @@
     </div>
 
     <div class="formBox">
+        <pre class="prettyprint" data-bind="html: rules">
+        </pre>
+        <br>
         <pre class="prettyprint">
+
 define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-addons"], function (ko, RuleEngine, personRules) {
 
     // set deep to false if you do not want to traverse rules
@@ -164,7 +168,7 @@ define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-ad
             var $elements = $(".validationMessage:visible");
             if ($elements.length > 0) {
                 var position = $($elements[0]).offset().top - ($(window).height() / 2);
-                $('html,body').animate({scrollTop: position}, 400);
+                $('html,body').animate({scrollTop: position}, 350);
             }
         } else {
             alert('Validation passed!');
@@ -185,10 +189,15 @@ define(["knockout", "knockout-rule-engine", "rules/person/rules", "validation-ad
     // example of wiring a field at apply time
     ruleEngine.apply(personModel);
 
+    personModel.rules = JSON.stringify(personRules, null, 4);
+
     ko.applyBindings(personModel, $('html')[0]);
 });
+
         </pre>
     </div>
 </div>
+
+<script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>
